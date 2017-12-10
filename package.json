@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "firebase": "^4.6.2",
+    "native-base": "^2.3.4",
     "react": "16.0.0",
     "react-native": "0.50.1",
+    "react-native-base": "^1.1.0",
     "react-navigation": "^1.0.0-beta.19"
   },
   "devDependencies": {

@@ -10,9 +10,13 @@ import {
   Text, // Renders text
   View // Container component
 } from "react-native";
-
 import { StackNavigator } from "react-navigation";
 //import Spinner from "react-native-loading-spinner-overlay";
+import * as firebase from 'firebase';
+
+
+
+
 
 export default class Login extends Component {
   constructor() {
@@ -29,13 +33,22 @@ export default class Login extends Component {
     },
     header: null
   };
-  async onLoginPress() {
-    const { email, password } = this.state;
-    console.log(email);
-    console.log(password);
-    await AsyncStorage.setItem("email", email);
-    await AsyncStorage.setItem("password", password);
-    this.props.navigation.navigate("Boiler");
+  // async onLoginPress() {
+  //   const { email, password } = this.state;
+  //   console.log(email);
+  //   console.log(password);
+  //   await AsyncStorage.setItem("email", email);
+  //   await AsyncStorage.setItem("password", password);
+  //   this.props.navigation.navigate("Boiler");
+  // }
+  async login(email,password){
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email,password);
+      alert("login Success!");
+      this.props.navigation.navigate("Boiler");
+    } catch (error) {
+      alert("Invalid username or password");
+    }
   }
   render() {
     return (
@@ -47,7 +60,7 @@ export default class Login extends Component {
           </View>
           <KeyboardAvoidingView style={styles.keyboard}>
             <TextInput
-              placeholder="Username"
+              placeholder="Email"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.passwordInput.focus()}
@@ -69,7 +82,7 @@ export default class Login extends Component {
 
             <TouchableOpacity
               style={styles.buttonContainer}
-              onPress={this.onLoginPress.bind(this)}
+              onPress={() => this.login(this.state.email,this.state.password)}
             >
               <Text style={styles.buttonText}>LOGIN</Text>
             </TouchableOpacity>

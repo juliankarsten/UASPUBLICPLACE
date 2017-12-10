@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import { StackNavigator } from "react-navigation";
+import * as firebase from 'firebase';
 
 export default class Register extends Component {
   constructor(props) {
@@ -31,15 +32,38 @@ export default class Register extends Component {
     }
   };
 
-  async onRegisterPress() {
-    const { email, password, name } = this.state;
-    console.log(email);
-    console.log(name);
-    console.log(password);
-    await AsyncStorage.setItem("email", email);
-    await AsyncStorage.setItem("name", name);
-    await AsyncStorage.setItem("password", password);
-    this.props.navigation.navigate("Login");
+  // async onRegisterPress() {
+  //   const { email, password, name } = this.state;
+  //   console.log(email);
+  //   console.log(name);
+  //   console.log(password);
+  //   await AsyncStorage.setItem("email", email);
+  //   await AsyncStorage.setItem("name", name);
+  //   await AsyncStorage.setItem("password", password);
+  //   this.props.navigation.navigate("Login");
+  // }
+
+  async signup(email,password){
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email,password);
+      var userId = firebase.auth().currentUser.uid;
+      this.writeToDatabase(userId);
+      alert("Signup Success!");
+      this.props.navigation.navigate("Login");
+    } catch (error) {
+      alert(error.toString());
+    }
+  }
+  writeToDatabase = (userId) => {
+    let today = new Date();
+    let Times = today.getDate() + " " + today.getMonth() + " " + today.getFullYear() + 
+    " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var database = firebase.database().ref("Users").child(userId);
+    database.set({
+      username: this.state.name,
+      email : this.state.email,
+      password : this.state.password
+    });
   }
 
   render() {
@@ -97,7 +121,7 @@ export default class Register extends Component {
           />
         </KeyboardAvoidingView>
         <TouchableHighlight
-          onPress={this.onRegisterPress.bind(this)}
+          onPress={() => this.signup(this.state.email,this.state.password)}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Register</Text>
