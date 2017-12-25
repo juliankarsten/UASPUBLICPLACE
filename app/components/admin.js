@@ -44,8 +44,14 @@ export default class Login extends Component {
   async login(email,password){
     try {
       await firebase.auth().signInWithEmailAndPassword(email,password);
+    //   database.once('value',(snapshot) => {
+    //         AsyncStorage.multiSet([
+    //             ["email", this.state.email],
+    //             ["password", this.state.password],
+    //         ]);
+    //     });
       alert("login Success!");
-      this.props.navigation.navigate("Boiler");
+      this.props.navigation.navigate("adminhome");
     } catch (error) {
       alert("Invalid username or password");
     }
@@ -84,28 +90,11 @@ export default class Login extends Component {
               style={styles.buttonContainer}
               onPress={() => this.login(this.state.email,this.state.password)}
             >
-              <Text style={styles.buttonText}>LOGIN</Text>
+              <Text style={styles.buttonText}>LOGIN as ADMIN</Text>
             </TouchableOpacity>
           </KeyboardAvoidingView>
         </View>
-        <TouchableOpacity style={styles.button}>
-          <Text
-            style={styles.buttonText}
-            onPress={() => this.props.navigation.navigate("Register")}
-            title="Sign up"
-          >
-            Sign up
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text
-            style={styles.buttonText}
-            onPress={() => this.props.navigation.navigate("admin")}
-            title="admin login"
-          >
-            Admin Login
-          </Text>
-        </TouchableOpacity>
+        
       </View>
     );
   }
@@ -150,7 +139,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#27ae60",
     paddingVertical: 15
-  }
+  },
+ 
 });
-
-AppRegistry.registerComponent("Login", () => Login);
+AppRegistry.registerComponent("admin", () => admin);

@@ -21,6 +21,14 @@ import listbandara from "./app/components/listbandara";
 import detailbandara from "./app/components/detailbandara";
 import listhalte from "./app/components/listhalte";
 import detailhalte from "./app/components/detailhalte";
+import admin from"./app/components/admin";
+import adminhome from "./app/components/adminhome";
+import tambah from "./app/components/tambah";
+import listpolisiadmin from "./app/components/listpolisiadmin";
+import listrsadmin from "./app/components/listrsadmin";
+import listbandaraadmin from "./app/components/listbandaraadmin";
+import listhalteadmin from "./app/components/listhalteadmin";
+import listspbuadmin from "./app/components/listspbuadmin";
 
 import { StackNavigator } from "react-navigation";
 import * as firebase from 'firebase';
@@ -90,6 +98,30 @@ export default App = StackNavigator({
       title: "LIST SPBU"
     }
   },
+  listspbuadmin: {
+    screen: listspbuadmin,
+    navigationOptions: {
+      title: "LIST SPBU"
+    }
+  },
+  listhalteadmin: {
+    screen: listhalteadmin,
+    navigationOptions: {
+      title: "LIST HALTE"
+    }
+  },
+  listbandaraadmin: {
+    screen: listbandaraadmin,
+    navigationOptions: {
+      title: "LIST BANDARA"
+    }
+  },
+  listrsadmin: {
+    screen: listrsadmin,
+    navigationOptions: {
+      title: "LIST RUMAH SAKIT"
+    }
+  },
   Boiler: {
     screen: Boiler,
     navigationOptions: {
@@ -106,6 +138,12 @@ export default App = StackNavigator({
     screen: detailspbu,
     navigationOption: {
       title: "DETAIL SPBU"
+    }
+  },
+  listpolisiadmin: {
+    screen: listpolisiadmin,
+    navigationOption: {
+      title: "LIST KANTOR POLISI"
     }
   },
   listpolisi: {
@@ -144,10 +182,28 @@ export default App = StackNavigator({
       title: "DETAIL HALTE"
     }
   },
+  admin: {
+    screen: admin,
+    navigationOption: {
+      title: "admin"
+    }
+  },
+  adminhome: {
+    screen: adminhome,
+    navigationOption: {
+      title: "adminhome"
+    }
+  },
   listhalte: {
     screen: listhalte,
     navigationOption: {
       title: "LIST HALTE"
+    }
+  },
+  tambah : {
+    screen: tambah,
+    navigationOption: {
+      title: "tambah data"
     }
   }
 });

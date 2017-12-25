@@ -54,11 +54,11 @@ export default class Boiler extends Component {
   
   renderRow(item){
     return(
-      <TouchableHighlight
-      onPress = {() => {
-        this.pressRow(item);
-      }}
-      >
+      // <TouchableHighlight
+      // onPress = {() => {
+      //   this.pressRow(item);
+      // }}
+      // >
       <View style={{flexDirection:'row'}}>
       <Image source={require('./rumahsakit.png')} style={{width : 100 , height : 100}}>
       </Image>
@@ -74,7 +74,7 @@ export default class Boiler extends Component {
         </View>
       </View>
       </View>
-      </TouchableHighlight>
+      // </TouchableHighlight>
     );
   }
 
